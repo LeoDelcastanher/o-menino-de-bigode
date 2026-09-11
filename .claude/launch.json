@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "menino-de-bigode-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/dev-server.js"],
+      "port": 5173
+    }
+  ]
+}

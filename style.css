@@ -1,0 +1,308 @@
+/* ============================================================
+   o Menino de Bigode — vaporwave pixel link page
+   ============================================================ */
+
+:root {
+  --pink: #ff2fd6;
+  --pink-deep: #b3009e;
+  --cyan: #23f2ff;
+  --purple: #6a2fd6;
+  --purple-deep: #2a0a4d;
+  --gold: #ffe15c;
+  --ink: #100a2a;
+  --paper: #fdf3ff;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "VT323", "Press Start 2P", monospace;
+  font-size: 20px;
+  overflow-x: hidden;
+  cursor: default;
+  image-rendering: pixelated;
+}
+
+/* ---------- vaporwave backdrop ---------- */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #1a0a3d 0%,
+    #3d1a6b 25%,
+    #8b2fb0 50%,
+    #ff2fd6 75%,
+    #ff8a5c 100%
+  );
+}
+
+.sun {
+  position: absolute;
+  left: 50%;
+  top: 28%;
+  width: min(60vw, 420px);
+  height: min(60vw, 420px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--gold) 0px,
+    var(--gold) 14px,
+    transparent 14px,
+    transparent 22px
+  );
+  background-color: #ffb347;
+  box-shadow: 0 0 120px 20px rgba(255, 138, 92, 0.55);
+}
+
+.grid-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background-image: linear-gradient(
+      rgba(35, 242, 255, 0.55) 2px,
+      transparent 2px
+    ),
+    linear-gradient(90deg, rgba(35, 242, 255, 0.55) 2px, transparent 2px);
+  background-size: 60px 60px;
+  transform: perspective(220px) rotateX(60deg);
+  transform-origin: bottom;
+  animation: floor-scroll 3.5s linear infinite;
+}
+
+@keyframes floor-scroll {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 60px, 0 0;
+  }
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(2px 2px at 10% 15%, #fff, transparent),
+    radial-gradient(2px 2px at 80% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 30% 25%, var(--cyan), transparent),
+    radial-gradient(2px 2px at 60% 8%, #fff, transparent),
+    radial-gradient(2px 2px at 90% 30%, var(--gold), transparent),
+    radial-gradient(2px 2px at 45% 5%, #fff, transparent),
+    radial-gradient(2px 2px at 15% 35%, #fff, transparent);
+  background-repeat: no-repeat;
+  animation: twinkle 2.4s steps(2) infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0px,
+    rgba(0, 0, 0, 0.18) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ---------- profile card ---------- */
+
+main.card {
+  position: relative;
+  z-index: 1;
+  max-width: 440px;
+  margin: 6vh auto 4vh;
+  padding: 0 16px;
+}
+
+.card-inner {
+  background: rgba(16, 10, 42, 0.82);
+  border: 4px solid var(--paper);
+  box-shadow: 0 0 0 4px var(--purple-deep), 8px 8px 0 0 rgba(0, 0, 0, 0.55),
+    0 0 30px rgba(255, 47, 214, 0.35);
+  padding: 28px 22px 24px;
+  image-rendering: pixelated;
+}
+
+.avatar-frame {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--purple-deep);
+  border: 4px solid var(--cyan);
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.avatar-mustache {
+  width: 70%;
+  fill: var(--pink);
+  filter: drop-shadow(0 0 6px var(--pink));
+}
+
+.title {
+  font-family: "Press Start 2P", monospace;
+  text-align: center;
+  line-height: 1.7;
+  margin: 0 0 14px;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.title-line {
+  display: block;
+  color: var(--paper);
+  text-shadow: 3px 3px 0 var(--pink-deep), -2px -2px 0 var(--cyan),
+    0 0 18px var(--cyan);
+}
+
+.blurb {
+  text-align: center;
+  font-size: 22px;
+  color: var(--gold);
+  margin: 0 0 26px;
+  letter-spacing: 1px;
+}
+
+.blink-cursor {
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- link buttons ---------- */
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--purple);
+  border: 3px solid var(--paper);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 4px 4px 0 0 var(--pink-deep);
+  transition: transform 0.06s steps(1), box-shadow 0.06s steps(1),
+    background-color 0.15s;
+}
+
+.link-btn:hover {
+  background: var(--pink-deep);
+}
+
+.link-btn:active,
+.link-btn.pressed {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 var(--pink-deep);
+}
+
+.link-btn .icon {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  fill: var(--cyan);
+}
+
+.link-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+  background: #3a2a5c;
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.4);
+}
+
+.link-btn[aria-disabled="true"] .icon {
+  fill: var(--paper);
+}
+
+.link-label {
+  flex: 1;
+}
+
+.link-soon {
+  font-size: 9px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.footer-line {
+  font-size: 15px;
+  color: var(--cyan);
+  text-shadow: 0 0 6px var(--cyan);
+  margin: 0;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 380px) {
+  .card-inner {
+    padding: 22px 16px 18px;
+  }
+  .title {
+    font-size: 13px;
+  }
+}
